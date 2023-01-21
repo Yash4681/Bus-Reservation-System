@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminCom from './components/Admin/AdminCom';
+import AdminLogin from './components/Admin/AdminLogin';
+import BusList from './components/BusList';
+import Home from './components/Home';
+import NavBar from './components/NavBar';
+import Owner from './components/Owner/Owner';
+import OwnerLogin from './components/Owner/OwnerLogin';
+import Register from './components/User/Register';
+import UserLogin from './components/User/UserLogin';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="buslist" element={<BusList button="book" />} />
+          <Route exact path="userlogin" element={<UserLogin />} />
+          <Route exact path="ownerlogin" element={<OwnerLogin />} />
+          <Route exact path="adminlogin" element={<AdminLogin />} />
+          <Route exact path="register" element={<Register />} />
+          <Route exact path="admincom" element={<AdminCom />} />
+          <Route exact path="ownercom" element={<Owner />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
