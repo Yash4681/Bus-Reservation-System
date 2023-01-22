@@ -9,7 +9,7 @@ const fetchuser = require("../middleware/fetchuser");
 const JWT_CODE = "helloalliam$yash";
 
 
-//ROUTE 1: Authenticate a user using post"/api/admin/login" - no login required
+//ROUTE 1: Authenticate a admin using post"/api/admin/login" - no login required
 router.post("/login",[
 
     //Authentication

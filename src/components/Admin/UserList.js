@@ -5,6 +5,7 @@ import User from "./User";
 const UserList = (props) => {
   // const context = useContext(userContext);
   // const { user, getUsers } = context;
+  
     const {user} = props;
 
   // useEffect(() => {

@@ -12,6 +12,8 @@ const AdminCom = () => {
   const { user, getUsers } = usercontext;
 
   useEffect(() => {
+
+    //Get all users data
     getUsers();
 
     // eslint-disable-next-line
@@ -21,6 +23,8 @@ const AdminCom = () => {
   const [on, setOn] = useState(false)
   const [busList, setBusList] = useState(false)
   const [userList, setUserList] = useState(false)
+
+  //Edit bus in DB
   const handleClick = () => {
     editBus(bus.id, bus.etitle, bus.eroute, bus.eprice);
     refClose.current.click();
@@ -30,6 +34,7 @@ const AdminCom = () => {
       setBus({...bus, [e.target.name]: e.target.value})
   }
 
+  //function to toggel Add bus button
   const toggleOn = () => {
       if(on === false){
         setOn(true);
@@ -37,6 +42,8 @@ const AdminCom = () => {
         setOn(false);
       }
   }
+
+  //function to toggel bus list button
   const toggleBusList = () => {
     if(busList === false){
       setBusList(true);
@@ -44,6 +51,8 @@ const AdminCom = () => {
       setBusList(false);
     }
 }
+
+  //function to toggel user list button
 const toggleUserList = () => {
   if(userList === false){
     setUserList(true);
@@ -52,6 +61,7 @@ const toggleUserList = () => {
   }
 }
 
+//Update bus data from user
   const updateBus = (currbus) => {
     ref.current.click();
     setBus({id: currbus._id, etitle:currbus.title, eroute:currbus.route, eprice:currbus.price});
@@ -62,6 +72,8 @@ const toggleUserList = () => {
 
   return (
     <div className="container">
+
+    {/* Modal for editing bus */}
     <button
     type="button"
     className="btn btn-primary d-none"
@@ -156,12 +168,19 @@ const toggleUserList = () => {
       </div>
     </div>
   </div>
+  
     <div>
     <button className="btn btn-primary mx-4 my-4" onClick={toggleOn}> {on ? "close" : "Add Bus"}</button>
     <button className="btn btn-primary mx-4 my-4" onClick={toggleUserList}> {userList ? "close" : "Get UserList"}</button>
     <button className="btn btn-primary mx-4 my-4" onClick={toggleBusList}> {busList ? "close" : "Get BusList"}</button>
+
+    {/* Add bus component */}
     {on && <AddBus />}
+
+    {/* List of all Buses */}
     {busList && <BusList updateBus={updateBus} admin="true"/>}
+    
+    {/* List of All Users */}
     {userList && <UserList user={user} />}
     </div>
     </div>

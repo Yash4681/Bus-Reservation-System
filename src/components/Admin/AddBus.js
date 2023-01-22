@@ -2,14 +2,19 @@ import React,{useContext, useState} from "react";
 import busContext from "../../context/BusContext/busContext"
 
 
-const AddBus = (props) => {
+const AddBus = () => {
     const context = useContext(busContext);
     const {addBus} = context;
 
     const [bus, setBus] = useState({owner:"", title: "", route: "", price: ""})
+
     const handleClick = (e) => {
         e.preventDefault();
+
+        //Add bus to DB
         addBus(bus.owner, bus.title, bus.route, bus.price);
+        
+        //Reset Add bus component
         setBus({owner:"", title: "", route: "", price: ""});    
     }
 

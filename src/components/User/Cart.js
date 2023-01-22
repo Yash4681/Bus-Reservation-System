@@ -9,19 +9,25 @@ const Cart = () => {
     const {user, cart, getUserCart, getUserData} = context;
     let navigate = useNavigate();
   
+    //Get users items only
     const userCart = cart.filter((item) => {return item.name === user.name})
+
+    //Calculate total price
     let total = 0;
     userCart.forEach(element => {
       total += element.price;
     });
+
     useEffect(() => {
 
+      //Get users data and cart data if user is Logged-in
       if(localStorage.getItem("token")){
         getUserCart();
         getUserData();
       }else{
         navigate("/userlogin");
       }
+      
       // eslint-disable-next-line
     }, []);
 

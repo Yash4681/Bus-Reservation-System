@@ -14,10 +14,12 @@ const Bus = (props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    //Booking is not allowed if user is not logged-in
     if(!localStorage.getItem("token")){
       navigate("/userlogin");
       alert("Please Login first");
     }else{
+      //Add item to cart
       addCart(user.name, user.email, bus.owner, title, route, price);
     }
   }
@@ -35,6 +37,8 @@ const Bus = (props) => {
                 </div>
                 }
                 <div className='pe-5'>{price} Rs.</div>
+                
+                {/* Different buttons for different component */}
                 {button === "book" || button==="booked" ? <button disabled={disable} className="btn btn-outline-light" onClick={handleClick}><span className="badge bg-primary rounded-pill">{button}</span></button> : 
                 (<div> <i className="fa-solid fa-trash-can mx-2" onClick={()=>{deleteBus(bus._id);}}></i>
           <i className="fa-solid fa-pen-to-square mx-2" onClick={()=>{updateBus(bus);}}></i> </div>)}

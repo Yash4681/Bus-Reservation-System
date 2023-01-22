@@ -120,7 +120,7 @@ router.post("/getuser", fetchuser ,async (req,res) => {
   }
 });
 
-//ROUTE 1: Authenticate a user using post"/api/auth/owner" - no login required
+//ROUTE 4: Authenticate a owner using post"/api/auth/owner" - no login required
 router.post("/owner",[
 
   //Authentication

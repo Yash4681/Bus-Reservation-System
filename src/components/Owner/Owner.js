@@ -13,22 +13,26 @@ const Owner = () => {
   
   const usercontext = useContext(userContext);
   const {user, cart, getUserCart, getUserData} = usercontext;
+
   let navigate = useNavigate();
 
   const [bus, setBus] = useState({id:"", etitle: "", eroute: "", eprice: ""})
+  const [on, setOn] = useState(false)
 
+  //Edit Bus on DB
   const handleClick = () => {
     editBus(bus.id, bus.etitle, bus.eroute, bus.eprice);
     refClose.current.click();
   }
-  const [on, setOn] = useState(false)
 
+  //Get data of buses that are booked and is owned by user
   const bookedBus = cart.filter((item) => {return item.owner === user.name});
 
   const handleChange = (e) => {
       setBus({...bus, [e.target.name]: e.target.value})
   }
 
+  //Toogle function for add bus button
   const toggleOn = () => {
     if(on === false){
       setOn(true);
@@ -37,6 +41,7 @@ const Owner = () => {
     }
 }
 
+//Update bus data
   const updateBus = (currbus) => {
     ref.current.click();
     setBus({id: currbus._id, etitle:currbus.title, eroute:currbus.route, eprice:currbus.price});
@@ -47,19 +52,27 @@ const Owner = () => {
 
   useEffect(() => {
 
+    //If user is Logged-in
     if(localStorage.getItem("token")){
+      //get data of buses owned by user
       getUserBus();
+      //get cart data
       getUserCart();
+      //get users data
       getUserData();
+
     }else{
       navigate("/ownerlogin");
     }
+
     // eslint-disable-next-line
   }, []);
 
 
   return (
 <div className="container">
+
+    {/* Modal for editing bus */}
     <button
     type="button"
     className="btn btn-primary d-none"
@@ -154,8 +167,11 @@ const Owner = () => {
       </div>
     </div>
   </div>
+
   <button className="btn btn-primary mx-4 my-4" onClick={toggleOn}> {on ? "close" : "Add Bus"}</button>
   {on && <AddBus />}
+
+  {/* List of buses owned by user */}
     <div>
     <h1> Your Buses</h1>
       <ol className="list-group list-group-numbered row">
@@ -166,6 +182,8 @@ const Owner = () => {
         })}            
             </ol>
     </div>
+
+    {/* List of booked bus */}
     <div>
     <h1>Booked Buses</h1>
       <ol className="list-group list-group-numbered row">

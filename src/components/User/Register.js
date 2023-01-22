@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Register = (props) => {
+const Register = () => {
   
   let navigate = useNavigate();
 
   const [cred, setCred] = useState({name:"", email: "", password: "", cpassword: ""});
   const [isOwner, setIsOwner] = useState(false);
+
   const handleChange = (e) => {
       setCred({...cred, [e.target.name] : e.target.value})
   }
 
+  //For setting owner
   const toggle = () => {
     if(isOwner === false){
       setIsOwner(true);
@@ -23,6 +25,7 @@ const Register = (props) => {
       e.preventDefault();
       const{name, email, password} = cred;
 
+      //Create new user using api
       const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
           method: 'POST',
           headers: {
@@ -32,6 +35,8 @@ const Register = (props) => {
         });
 
         const json = await response.json();
+
+        //If user already exist return alert
         if(json.success){
           localStorage.setItem("token", json.token);
           console.log(json);

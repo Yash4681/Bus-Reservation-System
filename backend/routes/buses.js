@@ -19,12 +19,8 @@ router.get("/fetchbuses", fetchuser, async (req,res) => {
 //Route 2: Add a new Bus using: POST "/api/buses/addbus" - Login required
 router.post("/addbus", fetchuser, async (req,res) => {
 
-    // const newBus = new Bus (req.body);
-
     try {
 
-        // const savedBus = await newBus.save();
-        // res.status(200).json(savedBus);
         const {owner, title, route, price} = req.body;
 
         const bus = new Bus({
@@ -45,13 +41,14 @@ router.put("/updatebus/:id", fetchuser, async (req,res) => {
     try {
     
     const {title, route, price} = req.body;
-    //create newNote object.
+
+    //create newBus object.
     const newBus =  {};
     if(title){newBus.title = title};
     if(route){newBus.route = route};
     if(price){newBus.price = price};
 
-    //find the note to be updated and update it.
+    //find the bus to be updated and update it.
     let bus = await Bus.findById(req.params.id);
     if(!bus){return res.status(404).send("Not Found")}
 
@@ -68,12 +65,12 @@ router.put("/updatebus/:id", fetchuser, async (req,res) => {
 
 });
 
-//Route 4: Delete Note using: DELETE "/api/buses/deletebus/" - Login required
+//Route 4: Delete Bus using: DELETE "/api/buses/deletebus/" - Login required
 router.delete("/deletebus/:id", fetchuser, async (req,res) => {
 
     try {
         
-    //find the note to be updated and update it.
+    //find the bus to be updated and update it.
     let bus = await Bus.findById(req.params.id);
     if(!bus){return res.status(404).send("Not Found")}
 

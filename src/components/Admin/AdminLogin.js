@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
-const UserLogin = (props) => {
+const UserLogin = () => {
 
   let navigate = useNavigate();
 
   const [cred, setCred] = useState({email: "", password: ""});
+
   const handleChange = (e) => {
       setCred({...cred, [e.target.name] : e.target.value})
   }
 
   const handleSubmit = async(e) => {
       e.preventDefault();
+
+      //Authenticate using api
       const response = await fetch(`http://localhost:5000/api/admin/login`, {
           method: 'POST',
           headers: {
@@ -23,6 +26,8 @@ const UserLogin = (props) => {
 
         const json = await response.json();
         console.log(json);
+
+        //Allow access to Admin component only if user is a valid admin
         if(json.success){
           localStorage.setItem("token", json.token);
           navigate("/admincom");

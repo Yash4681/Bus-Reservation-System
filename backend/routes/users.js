@@ -22,7 +22,7 @@ router.delete("/deleteuser/:id", fetchuser, async (req,res) => {
 
     try {
         
-    //find the note to be updated and update it.
+    //find the user to be updated and update it.
     let user = await User.findById(req.params.id);
     if(!user){return res.status(404).send("Not Found")}
 
@@ -74,7 +74,7 @@ router.delete("/deletecart/:id", fetchuser, async (req,res) => {
 
     try {
         
-    //find the note to be updated and update it.
+    //find the item to be updated and update it.
     let cart = await Cart.findById(req.params.id);
     if(!cart){return res.status(404).send("Not Found")}
 
