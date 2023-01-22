@@ -10,6 +10,10 @@ const Cart = () => {
     let navigate = useNavigate();
   
     const userCart = cart.filter((item) => {return item.name === user.name})
+    let total = 0;
+    userCart.forEach(element => {
+      total += element.price;
+    });
     useEffect(() => {
 
       if(localStorage.getItem("token")){
@@ -30,7 +34,7 @@ const Cart = () => {
             <h5 className="offcanvas-title" id="offcanvasRightLabel">Your Buses</h5>
             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        {/* <h3><div className="badge text-bg-secondary w-100"> Total= 100 Rs. </div></h3> */}
+        <h3><div className="badge text-bg-secondary w-100"> Total= {total} Rs. </div></h3>
         <div className="offcanvas-body">
         <ol className="list-group list-group-numbered row">
         {userCart.map((item) => {
