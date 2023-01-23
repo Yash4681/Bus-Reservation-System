@@ -10,7 +10,7 @@ const Cart = () => {
     let navigate = useNavigate();
   
     //Get users items only
-    const userCart = cart.filter((item) => {return item.name === user.name})
+    const userCart = cart.filter((item) => {return item.email === user.email})
 
     //Calculate total price
     let total = 0;
